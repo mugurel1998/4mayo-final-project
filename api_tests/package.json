@@ -1,0 +1,38 @@
+{
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "mocha": "^10.4.0",
+    "pactum": "^3.6.9"
+  },
+  "name": "api_tests",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "asynckit": "^0.4.0",
+    "centra": "^2.7.0",
+    "combined-stream": "^1.0.8",
+    "deep-override": "^1.0.2",
+    "delayed-stream": "^1.0.0",
+    "follow-redirects": "^1.15.6",
+    "form-data-lite": "^1.0.3",
+    "json-query": "^2.2.2",
+    "klona": "^2.0.6",
+    "lightcookie": "^1.0.25",
+    "matchit": "^1.1.0",
+    "mime-lite": "^1.0.3",
+    "openapi-fuzzer-core": "^1.0.6",
+    "pactum-matchers": "^1.1.7",
+    "parse-graphql": "^1.0.0",
+    "phin": "^3.7.1",
+    "polka": "^0.5.2",
+    "trouter": "^2.0.1"
+  },
+  "scripts": {
+    "test_register": "npx mocha tests/register-user.test.js --timeout 10000",
+    "test_notes": "npx mocha tests/user-create-notes.test.js --timeout 10000",
+    "test": "npx mocha tests/*.test.js --timeout 10000"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
