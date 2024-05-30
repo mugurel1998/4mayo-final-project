@@ -1,32 +1,30 @@
 const { faker } = require("@faker-js/faker");
 const { spec } = require("pactum");
 
-const baseUrl = "https://practice.expandtesting.com/notes/api";
+const baseUrl = "https://practice.expandtesting.com";
 
 const username = faker.person.fullName();
 const email = faker.internet.email();
 const password = "1234567";
 let tokenId = "";
 let noteId = "";
-const noteSchema = require("../schemas/note_schema.json")
+const noteSchema = require("../data/schemas/get-note-schema.json")
 
-describe("Account Usage", () => {
+describe("Account Usage Test Suite", () => {
     before('Register user', async () => {
-
         await spec()
-            .post(`${baseUrl}/users/register`)
+            .post(`${baseUrl}/notes/api/users/register`)
             .withForm({
                 "name": username,
                 "email": email,
                 "password": password
             })
-            .expectStatus(201)
-
+            .expectStatus(201);
     });
 
     it("Log In", async () => {
         await spec()
-            .post(`${baseUrl}/users/login`)
+            .post(`${baseUrl}/notes/api/users/login`)
             .withForm({
                 "email": email,
                 "password": password
@@ -40,20 +38,19 @@ describe("Account Usage", () => {
 
     it("Create Notes", async () => {
         await spec()
-            .post(`${baseUrl}/notes`)
+            .post(`${baseUrl}/notes/api/notes`)
             .withForm({
                 "title": "Practice WebApp UI",
                 "description": "Finish the development of the UI Automation Practice WebApp",
                 "category": "Personal"
             })
             .withHeaders("x-auth-token", tokenId)
-            .expectStatus(200)
-            
+            .expectStatus(200);
     })
 
     it("Get all the notes", async () =>{
         await spec()
-            .get(`${baseUrl}/notes`)
+            .get(`${baseUrl}/notes/api/notes`)
             .withHeaders("x-auth-token", tokenId)
             .expectJsonSchema(noteSchema)
             .expectStatus(200)
@@ -65,8 +62,8 @@ describe("Account Usage", () => {
     it("Delete notes by id", async () =>{
         await spec()
             .withHeaders("x-auth-token", tokenId)
-            .delete(`${baseUrl}/notes/${noteId}`)
+            .delete(`${baseUrl}/notes/api/notes/${noteId}`)
             .expectStatus(200)
-            .expectBodyContains("Note successfully deleted")
+            .expectBodyContains("Note successfully deleted");
     })
 })

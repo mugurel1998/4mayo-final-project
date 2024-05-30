@@ -2,17 +2,16 @@
 const { faker } = require("@faker-js/faker");
 const { spec } = require("pactum");
 
-const baseUrl = "https://practice.expandtesting.com/notes/api";
+const baseUrl = "https://practice.expandtesting.com";
 
-describe("Register User", () => {
+describe("Register User Test Suite", () => {
     
     it("Valid User Registration", async () => {
-
         const randomName = faker.person.fullName();
         const randomEmail = faker.internet.email();
 
         await spec()
-            .post(`${baseUrl}/users/register`)
+            .post(`${baseUrl}/notes/api/users/register`)
             .withForm({
                 "name": randomName,
                 "email": randomEmail,
@@ -20,12 +19,11 @@ describe("Register User", () => {
             })
             .expectStatus(201)
             .expectBodyContains("User account created successfully")//Check the message to be sure
-            //.inspect()
     });
 
     it("Invalid Name User Registration", async () => {
         await spec()
-            .post(`${baseUrl}/users/register`)
+            .post(`${baseUrl}/notes/api/users/register`)
             .withForm({
                 "name": "Ion",
                 "email": "ion@gmail.com",
@@ -33,12 +31,11 @@ describe("Register User", () => {
             })
             .expectStatus(400)
             .expectBodyContains("User name must be between 4 and 30 characters")//Check the message to be sure
-            //.inspect()
     });
       
     it("Invalid Password User Registration", async () => {
         await spec()
-            .post(`${baseUrl}/users/register`)
+            .post(`${baseUrl}/notes/api/users/register`)
             .withForm({
                 "name": "Mugurel",
                 "email": "mugurel@gmail.com",
@@ -46,6 +43,5 @@ describe("Register User", () => {
             })
             .expectStatus(400)
             .expectBodyContains("Password must be between 6 and 30 characters")//Check the message to be sure
-            //.inspect()
     });
 })

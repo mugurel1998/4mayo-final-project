@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "mocha": "^10.4.0",
+    "pactum": "^3.6.9"
+  },
+  "name": "api_tests",
+  "version": "1.0.0",
+  "scripts": {
+    "test_register": "npx mocha tests/register-user.test.js --timeout 10000",
+    "test_notes": "npx mocha tests/user-create-notes.test.js --timeout 10000",
+    "test": "npx mocha tests/*.test.js --timeout 10000"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

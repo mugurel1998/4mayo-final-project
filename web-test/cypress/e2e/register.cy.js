@@ -6,12 +6,14 @@ const userName = faker.internet.userName();
 const email = faker.internet.email();
 
 const password = "123456";
-const baseUrl = "https://automationteststore.com";
 
-describe("Register User", () => {
+describe("Register User Test Suite", () => {
+
+    beforeEach(() => {
+        cy.visit("/"); // Enter on the site before each test
+    })
 
     it("Register User", () => {
-        cy.visit(baseUrl);
         cy.get("#customer_menu_top a").click(); // Press Login button
         cy.get("#accountFrm > fieldset > button").click(); //Press Continue
         cy.get("#AccountFrm_firstname").type(firstName);
@@ -28,11 +30,10 @@ describe("Register User", () => {
         cy.get("#AccountFrm_newsletter1").click();
         cy.get("#AccountFrm_agree").click();
         cy.get("#AccountFrm > div.form-group > div > div > button").click();
-        cy.contains("YOUR ACCOUNT HAS BEEN CREATED!", { matchCase: false }).should("be.visible");//css ul vietii....
+        cy.contains("YOUR ACCOUNT HAS BEEN CREATED!", { matchCase: false }).should("be.visible");
     })
 
     it("Change the username", () => {
-        cy.visit(baseUrl);
         cy.get("#customer_menu_top a").click();
         cy.get("#loginFrm_loginname").type(userName);
         cy.get("#loginFrm_password").type(password);
@@ -44,7 +45,6 @@ describe("Register User", () => {
     })
 
     it("Log in & Log Out", () => {
-        cy.visit(baseUrl);
         cy.get("#customer_menu_top a").click();
         cy.get("#loginFrm_loginname").type(userName);
         cy.get("#loginFrm_password").type(password);
@@ -54,7 +54,6 @@ describe("Register User", () => {
     })
 
     it("Place Order", () => {
-        cy.visit(baseUrl);
         cy.get("#customer_menu_top a").click();
         cy.get("#loginFrm_loginname").type(userName);
         cy.get("#loginFrm_password").type(password);
